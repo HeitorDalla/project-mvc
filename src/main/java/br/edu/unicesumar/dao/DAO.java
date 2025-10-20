@@ -33,4 +33,55 @@ public class DAO<Object> {
         }
         return instance;
     }
+
+    // INSERÇÃO
+    public void save (Object object) {
+        try {
+            // INICIANDO UMA TRANSACAO
+            em.getTransaction().begin();
+
+            // SALVAR O OBJETO
+            em.persist(object);
+
+            // FECHAR A TRANSACAO
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            // FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMACAO NO BANCO DE DADOS
+            em.getTransaction().rollback();
+        }
+    }
+
+    // ATUALIZACAO
+    public void update (Object object) {
+        try {
+            // INICIANDO UMA TRANSACAO
+            em.getTransaction().begin();
+
+            // SALVAR O OBJETO
+            em.merge(object);
+
+            // FECHAR A TRANSACAO
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            // FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMACAO NO BANCO DE DADOS
+            em.getTransaction().rollback();
+        }
+    }
+
+    // DELEÇÃO
+    public void delete (Object object) {
+        try {
+            // INICIANDO UMA TRANSACAO
+            em.getTransaction().begin();
+
+            // SALVAR O OBJETO
+            em.remove(object);
+
+            // FECHAR A TRANSACAO
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            // FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMACAO NO BANCO DE DADOS
+            em.getTransaction().rollback();
+        }
+    }
 }
