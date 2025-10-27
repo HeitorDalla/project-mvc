@@ -1,55 +1,58 @@
 package br.edu.unicesumar.model;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-// INFORMACAO PARA O JPA QUE ESTA OBJETO É UMA TABELA NO BANCO
+//INFORMANDO PARA O JPA QUE ESTE OBJETO É UMA TABELA NO BANCO
 @Entity
-@Table(name = "usuario")
+@Table(name="usuario_tbl")
 public class Usuario {
+
     @Id
-    @GeneratedValue(strategy = GenerationTyoe.AUTO) // indicar a estrategia que vai utilizar para que o banco controle o identificador na tabela
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id_usuario")
     private int id;
 
-    @Column(name = "nome_usuario")
+    @Column(name="nome_usuario")
     private String nome;
+    
+    @Column(name="cpf_usuario", nullable = false)
+    private String cpf;
 
-    @Column(name = "cpf_usuario", nullable = false)
-    private String cpf_usuario;
+    public Usuario(){}
 
-    // CONSTRUTORES
-    public Usuario () {}
-
-    public Usuario (int id, String nome, String cpf_usuario) {
+    public Usuario(int id, String nome, String cpf) {
         this.id = id;
         this.nome = nome;
-        this.cpf_usuario = cpf_usuario;
+        this.cpf = cpf;
     }
 
-    // MÉTODOS GET E SET
-    public int getId () {
+    public int getId(){
         return this.id;
     }
 
-    public int getNome () {
-        return this.nome;
-    }
-
-    public int getCpf () {
-        return this.cpf_usuario;
-    }
-
-    public void setId (int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setNome (String nome) {
+    public String getNome(){
+        return this.nome;
+    }
+
+    public void setNome(String nome){
         this.nome = nome;
     }
 
-    public void setCpf (String cpf_usuario) {
-        this.cpf_usuario = cpf_usuario;
+    public String getCpf(){
+        return this.cpf;
     }
+
+    public void setCpf(String cpf){
+        this.cpf = cpf;
+    }
+
 }

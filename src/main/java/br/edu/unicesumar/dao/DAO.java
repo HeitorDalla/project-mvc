@@ -5,83 +5,78 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class DAO<Object> {
+
     protected EntityManager em;
-    // PADRÃO SINGLETON
+    //PADRÃO SINGLETON
+    private static DAO instance;
 
-    // FAZER UMA UNICA CONEXAR AO BANCO DE DADOS
-    private static DAO instance; // não pode ter outras instancias
-
-    protected DAO () {
+    protected DAO(){
         em = getEntityManager();
     }
 
-    private EntityManager getEntityManager () {
-        // VERIFICAR SE EXISTE UM INSTANCIA (OU SEJA, SE ESTA IGUAL A NULO - SIGNIFICANDO QUE NAO FOI INSTANCIADO)
-        if (em == null) {
-            // PADRÃO FACTORY METHOD
-            EntityManagerFactory emf = Persistence
-                .createEntityManagerFactory("projeto_unicesumar");
+    private EntityManager getEntityManager(){
+        EntityManagerFactory emf = Persistence
+                .createEntityManagerFactory("exemplo_unicesumar");
+        if(em == null){
+            //PADRÃO FACTORY METHOD
             em = emf.createEntityManager();
         }
-
         return em;
     }
 
-    public static DAO getInstance () {
-        if (instance == null) {
-            instance = new DAO<>();
+    public static DAO getInstance(){
+        if(instance == null){
+            instance = new DAO();
         }
         return instance;
     }
 
-    // INSERÇÃO
-    public void save (Object object) {
+    //INSERÇÃO
+    public void save(Object object){
         try {
-            // INICIANDO UMA TRANSACAO
+            //INICIANDO UMA TRANSAÇÃO
             em.getTransaction().begin();
-
-            // SALVAR O OBJETO
+            //SALVAR O OBJETO
             em.persist(object);
-
-            // FECHAR A TRANSACAO
+            //FECHAR A TRANSAÇÃO
             em.getTransaction().commit();
         } catch (Exception e) {
-            // FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMACAO NO BANCO DE DADOS
+            e.printStackTrace();
+            //FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMAÇÃO NO BANCO DE DADOS
             em.getTransaction().rollback();
         }
     }
 
-    // ATUALIZACAO
-    public void update (Object object) {
+    //ATUALIZAÇÃO
+    public void update(Object object){
         try {
-            // INICIANDO UMA TRANSACAO
+            //INICIANDO UMA TRANSAÇÃO
             em.getTransaction().begin();
-
-            // SALVAR O OBJETO
+            //SALVAR O OBJETO
             em.merge(object);
-
-            // FECHAR A TRANSACAO
+            //FECHAR A TRANSAÇÃO
             em.getTransaction().commit();
         } catch (Exception e) {
-            // FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMACAO NO BANCO DE DADOS
+            e.printStackTrace();
+            //FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMAÇÃO NO BANCO DE DADOS
             em.getTransaction().rollback();
         }
     }
 
-    // DELEÇÃO
-    public void delete (Object object) {
+    //DELETE
+    public void delete(Object object){
         try {
-            // INICIANDO UMA TRANSACAO
+            //INICIANDO UMA TRANSAÇÃO
             em.getTransaction().begin();
-
-            // SALVAR O OBJETO
+            //SALVAR O OBJETO
             em.remove(object);
-
-            // FECHAR A TRANSACAO
+            //FECHAR A TRANSAÇÃO
             em.getTransaction().commit();
         } catch (Exception e) {
-            // FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMACAO NO BANCO DE DADOS
+            e.printStackTrace();
+            //FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMAÇÃO NO BANCO DE DADOS
             em.getTransaction().rollback();
         }
     }
+    
 }
