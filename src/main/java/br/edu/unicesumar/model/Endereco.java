@@ -36,7 +36,6 @@ public class Endereco {
     private String cep;
 
     // CONSTRUTORES
-
     public Endereco () {}
 
     public Endereco(int id, String logradouro, String numero, String bairro, String cidade, String estado, String cep) {
@@ -49,6 +48,7 @@ public class Endereco {
         this.cep = cep;
     }
 
+    // MÉTODOS
     public int getId() {
         return id;
     }
