@@ -17,12 +17,16 @@ public class Usuario {
     @Column(name="id_usuario")
     private int id;
 
-    @Column(name="nome_usuario")
+    @Column(name="nome_usuario", nullable = false)
     private String nome;
     
     @Column(name="cpf_usuario", nullable = false)
     private String cpf;
 
+    @Column(name="email_usuario", nullable = false)
+    private String email;
+
+    // CONSTRUTORES
     public Usuario(){}
 
     public Usuario(int id, String nome, String cpf) {
@@ -31,6 +35,7 @@ public class Usuario {
         this.cpf = cpf;
     }
 
+    // MÉTODOS
     public int getId(){
         return this.id;
     }
@@ -55,4 +60,11 @@ public class Usuario {
         this.cpf = cpf;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

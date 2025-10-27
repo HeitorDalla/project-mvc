@@ -77,6 +77,5 @@ public class DAO<Object> {
             //FAZENDO ROLLBACK PARA NÃO SALVAR A INFORMAÇÃO NO BANCO DE DADOS
             em.getTransaction().rollback();
         }
-    }
-    
+    }   
 }
