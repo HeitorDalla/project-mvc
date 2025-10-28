@@ -8,8 +8,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import br.edu.unicesumar.dao.CarrinhoDAO;
+
 public class MainApp extends Application {
     private static Stage stage;
+    private CarrinhoDAO carrinhoDAO = new CarrinhoDAO();
 
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
