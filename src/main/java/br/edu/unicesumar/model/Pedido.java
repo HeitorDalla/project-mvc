@@ -3,9 +3,12 @@ package br.edu.unicesumar.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.unicesumar.enumerate.StatusPedido;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,9 +38,59 @@ public class Pedido {
     @Column(name="valor_total_pedido", nullable = false)
     private double valorTotal;
 
-    // @Column(name="status_pedido", nullable = false)
-    // private StatusPedido status;
+    @Enumerated(EnumType.STRING)
+    @Column(name="status_pedido_pedido", nullable = false)
+    private StatusPedido status;
 
     // CONSTRUTORES
-    
+    public Pedido () {}
+
+    public Pedido(int id, Usuario usuario, List<ItemPedido> itens, double valorTotal, StatusPedido status) {
+        this.id = id;
+        this.usuario = usuario;
+        this.itens = itens;
+        this.valorTotal = valorTotal;
+        this.status = status;
+    }
+
+    // MÉTODOS
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
+    }
 }
