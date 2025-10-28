@@ -3,6 +3,7 @@ package br.edu.unicesumar.model;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,6 +24,10 @@ public class ItemCarrinho {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_produto_item_carrinho", referencedColumnName = "id_produto")
     private Produto produto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_carrinho_item_carrinho", referencedColumnName = "id_carrinho")
+    private Carrinho carrinho;
     
     @Column(name="quantidade_item_carrinho", nullable = false)
     private int quantidade;
@@ -30,9 +35,10 @@ public class ItemCarrinho {
     // CONSTRUTORES
     public ItemCarrinho () {}
 
-    public ItemCarrinho(int id, Produto produto, int quantidade) {
+    public ItemCarrinho(int id, Produto produto, Carrinho carrinho, int quantidade) {
         this.id = id;
         this.produto = produto;
+        this.carrinho = carrinho;
         this.quantidade = quantidade;
     }
 
@@ -51,6 +57,14 @@ public class ItemCarrinho {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public Carrinho getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
     }
 
     public int getQuantidade() {

@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import jakarta.persistence.CascadeType;
@@ -30,7 +30,7 @@ public class Usuario {
     @Column(name="email_usuario", nullable = false)
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco_usuario", referencedColumnName = "id_endereco")
     private Endereco endereco;
 

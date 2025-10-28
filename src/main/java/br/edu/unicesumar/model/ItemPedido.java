@@ -1,8 +1,8 @@
 package br.edu.unicesumar.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,20 +20,25 @@ public class ItemPedido {
     @Column(name="id_item_pedido")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_produto_item_pedido", referencedColumnName = "id_produto")
     private Produto produto;
     
     @Column(name="quantidade_item_pedido", nullable = false)
-    private String quantidade;
+    private int quantidade;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pedido_item_pedido", nullable = false)
+    private Pedido pedido;
 
     // CONSTRUTORES
     public ItemPedido () {}
 
-    public ItemPedido(int id, Produto produto, String quantidade) {
+    public ItemPedido(int id, Produto produto, int quantidade, Pedido pedido) {
         this.id = id;
         this.produto = produto;
         this.quantidade = quantidade;
+        this.pedido = pedido;
     }
 
     // MÉTODOS
@@ -53,11 +58,19 @@ public class ItemPedido {
         this.produto = produto;
     }
 
-    public String getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(String quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 }

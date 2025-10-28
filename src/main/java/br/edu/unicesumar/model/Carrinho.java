@@ -1,13 +1,15 @@
 package br.edu.unicesumar.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 //INFORMANDO PARA O JPA QUE ESTE OBJETO É UMA TABELA NO BANCO
@@ -20,14 +22,13 @@ public class Carrinho {
     @Column(name="id_carrinho")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_item_carrinho_carrinho", referencedColumnName = "id_item_carrinho")
-    private ItemCarrinho itens;
+    @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemCarrinho> itens = new ArrayList<>();
 
     // CONSTRUTORES
     public Carrinho () {}
 
-    public Carrinho(int id, ItemCarrinho itens) {
+    public Carrinho(int id, List<ItemCarrinho> itens) {
         this.id = id;
         this.itens = itens;
     }
@@ -41,11 +42,11 @@ public class Carrinho {
         this.id = id;
     }
 
-    public ItemCarrinho getItens() {
+    public List<ItemCarrinho> getItens() {
         return itens;
     }
 
-    public void setItens(ItemCarrinho itens) {
+    public void setItens(List<ItemCarrinho> itens) {
         this.itens = itens;
     }
 }
