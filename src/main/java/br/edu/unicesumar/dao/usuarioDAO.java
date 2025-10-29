@@ -11,9 +11,10 @@ public class UsuarioDAO extends DAO<Usuario>{
     public List<Usuario> listAllUsers(){
         try {
             TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+
             return query.getResultList();
         } catch (Exception e) {
-            return null;
+            return List.of();
         }
     }
 
@@ -21,7 +22,9 @@ public class UsuarioDAO extends DAO<Usuario>{
     public Usuario findUserById(int id){
         try {
             TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u " + "WHERE u.id = :id", Usuario.class);
+
             query.setParameter("id", id);
+            
             return query.getSingleResult();      
         } catch (Exception e) {
             return null;
