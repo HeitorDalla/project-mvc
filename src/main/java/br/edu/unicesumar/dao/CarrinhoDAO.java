@@ -3,26 +3,28 @@ package br.edu.unicesumar.dao;
 import java.util.List;
 
 import br.edu.unicesumar.model.Carrinho;
-import br.edu.unicesumar.model.Usuario;
 import jakarta.persistence.TypedQuery;
 
 public class CarrinhoDAO extends DAO<Carrinho>{
 
-    //LISTANDO TODOS OS USUÁRIOS
-    public List<Usuario> listAllUsers(){
+    //LISTANDO TODOS OS CARRINHOS
+    public List<Carrinho> listAllCarts(){
         try {
-            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+            TypedQuery<Carrinho> query = em.createQuery("SELECT c FROM Carrinho c", Carrinho.class);
+
             return query.getResultList();
         } catch (Exception e) {
-            return null;
+            return List.of();
         }
     }
 
-    //LISTANDO O USUÁRIO PELO IDENTIFICADOR
-    public Usuario findUserById(int id){
+    //LISTANDO O CARRINHO PELO IDENTIFICADOR
+    public Carrinho findCartById(int id){
         try {
-            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u " + "WHERE u.id = :id", Usuario.class);
+            TypedQuery<Carrinho> query = em.createQuery("SELECT c FROM Carrinho c " + "WHERE c.id = :id", Carrinho.class);
+
             query.setParameter("id", id);
+            
             return query.getSingleResult();      
         } catch (Exception e) {
             return null;

@@ -14,7 +14,7 @@ public class EnderecoDAO extends DAO<Endereco>{
 
             return query.getResultList();
         } catch (Exception e) {
-            return null;
+            return List.of();
         }
     }
 

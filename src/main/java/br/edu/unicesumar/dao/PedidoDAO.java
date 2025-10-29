@@ -14,7 +14,7 @@ public class PedidoDAO extends DAO<Pedido>{
 
             return query.getResultList();
         } catch (Exception e) {
-            return null;
+            return List.of();
         }
     }
 
