@@ -1,6 +1,5 @@
 package br.edu.unicesumar.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,11 +16,11 @@ import jakarta.persistence.Table;
 public class ItemCarrinho {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_item_carrinho")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_produto_item_carrinho", referencedColumnName = "id_produto")
     private Produto produto;
 

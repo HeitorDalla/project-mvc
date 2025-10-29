@@ -9,11 +9,11 @@ import jakarta.persistence.Table;
 
 //INFORMANDO PARA O JPA QUE ESTE OBJETO É UMA TABELA NO BANCO
 @Entity
-@Table(name="edereco_tbl")
+@Table(name="endereco_tbl")
 public class Endereco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_endereco")
     private int id;
 
@@ -29,10 +29,10 @@ public class Endereco {
     @Column(name="cidade_endereco", nullable = false)
     private String cidade;
     
-    @Column(name="estado_usuario", nullable = false)
+    @Column(name="estado_endereco", nullable = false)
     private String estado;
 
-    @Column(name="cep_usuario", nullable = false)
+    @Column(name="cep_endereco", nullable = false)
     private String cep;
 
     // CONSTRUTORES

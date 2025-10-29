@@ -24,11 +24,11 @@ import jakarta.persistence.Table;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_pedido")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_usuario_pedido", referencedColumnName = "id_usuario")
     private Usuario usuario;
 

@@ -1,6 +1,5 @@
 package br.edu.unicesumar.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +15,7 @@ import jakarta.persistence.Table;
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_produto")
     private int id;
 
@@ -29,7 +28,7 @@ public class Produto {
     @Column(name="preco_produto", nullable = false)
     private double preco;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_categoria_produto", referencedColumnName = "id_categoria")
     private Categoria categoria;
 
