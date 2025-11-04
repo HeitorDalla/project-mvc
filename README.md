@@ -142,5 +142,3 @@ MainApp.java
 Desenvolvido por **Heitor**, para estudos avançados de Java, MVC e automação de persistência.
 
 ---
-
-📌 *Este README pode ser expandido com imagens do sistema, fluxogramas e diagramas UML. Basta solicitar!* ✨
