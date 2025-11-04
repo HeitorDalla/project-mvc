@@ -1,4 +1,4 @@
-# 📌 Projeto MVC em Java
+# 📌 Ecommerce
 
 Este projeto segue o padrão arquitetural **MVC (Model–View–Controller)** com foco em organização, modularidade e camadas bem definidas.  
 O domínio envolve entidades como Usuário, Produto, Pedido e Carrinho, com persistência simples via DAO.
