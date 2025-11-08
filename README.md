@@ -1,4 +1,4 @@
-# 📌 Projeto MVC em Java
+# 📌 Ecommerce
 
 Este projeto segue o padrão arquitetural **MVC (Model–View–Controller)** com foco em organização, modularidade e camadas bem definidas.  
 O domínio envolve entidades como Usuário, Produto, Pedido e Carrinho, com persistência simples via DAO.
@@ -9,45 +9,66 @@ O domínio envolve entidades como Usuário, Produto, Pedido e Carrinho, com pers
 
 ```
 project-mvc/
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── br/edu/unicesumar/
-│       │       ├── dao/
-│       │       │   ├── CarrinhoDAO.java
-│       │       │   ├── CategoriaDAO.java
-│       │       │   ├── DAO.java
-│       │       │   ├── EnderecoDAO.java
-│       │       │   ├── ItemCarrinhoDAO.java
-│       │       │   ├── ItemPedidoDAO.java
-│       │       │   ├── PedidoDAO.java
-│       │       │   ├── ProdutoDAO.java
-│       │       │   └── UsuarioDAO.java
-│       │       │
-│       │       ├── enumerate/
-│       │       │   └── StatusPedido.java
-│       │       │
-│       │       └── model/
-│       │           ├── Carrinho.java
-│       │           ├── Categoria.java
-│       │           ├── Endereco.java
-│       │           ├── ItemCarrinho.java
-│       │           ├── ItemPedido.java
-│       │           ├── Pedido.java
-│       │           ├── Produto.java
-│       │           ├── Usuario.java
-│       │           ├── FXMLController.java
-│       │           └── MainApp.java
-│       │
-│       └── resources/
-│           ├── fxml/
-│           ├── META-INF/
-│           └── styles/
-│
-└── target/
-    ├── classes
-    ├── modules
-    └── test-classes
+├── src
+│   └── main
+│       ├── java
+│       │   ├── br
+│       │   │   └── edu
+│       │   │       └── unicesumar
+│       │   │           ├── controller
+│       │   │           │   ├── CarrinhoController.java
+│       │   │           │   ├── CategoriaController.java
+│       │   │           │   ├── EnderecoController.java
+│       │   │           │   ├── ItemCarrinhoController.java
+│       │   │           │   ├── ItemPedidoController.java
+│       │   │           │   ├── PedidoController.java
+│       │   │           │   ├── ProdutoController.java
+│       │   │           │   └── UsuarioController.java
+│       │   │           ├── dao
+│       │   │           │   ├── CarrinhoDAO.java
+│       │   │           │   ├── CategoriaDAO.java
+│       │   │           │   ├── DAO.java
+│       │   │           │   ├── EnderecoDAO.java
+│       │   │           │   ├── ItemCarrinhoDAO.java
+│       │   │           │   ├── ItemPedidoDAO.java
+│       │   │           │   ├── PedidoDAO.java
+│       │   │           │   ├── ProdutoDAO.java
+│       │   │           │   └── UsuarioDAO.java
+│       │   │           ├── enumerate
+│       │   │           │   └── StatusPedido.java
+│       │   │           ├── model
+│       │   │           │   ├── Carrinho.java
+│       │   │           │   ├── Categoria.java
+│       │   │           │   ├── Endereco.java
+│       │   │           │   ├── ItemCarrinho.java
+│       │   │           │   ├── ItemPedido.java
+│       │   │           │   ├── Pedido.java
+│       │   │           │   ├── Produto.java
+│       │   │           │   └── Usuario.java
+│       │   │           ├── service
+│       │   │           │   ├── CarrinhoService.java
+│       │   │           │   ├── CategoriaService.java
+│       │   │           │   ├── EnderecoService.java
+│       │   │           │   ├── ItemCarrinhoService.java
+│       │   │           │   ├── ItemPedidoService.java
+│       │   │           │   ├── PedidoService.java
+│       │   │           │   ├── ProdutoService.java
+│       │   │           │   └── UsuarioService.java
+│       │   │           ├── utils
+│       │   │           │   └── Utils.java
+│       │   │           ├── FXMLController.java
+│       │   │           └── MainApp.java
+│       │   └── module-info.java
+│       └── resources
+│           ├── META-INF
+│           │   └── persistence.xml
+│           ├── fxml
+│           │   └── primary.fxml
+│           └── styles
+│               └── Styles.css
+├── README.md
+├── nbactions.xml
+└── pom.xml
 ```
 
 ---
@@ -121,5 +142,3 @@ MainApp.java
 Desenvolvido por **Heitor**, para estudos avançados de Java, MVC e automação de persistência.
 
 ---
-
-📌 *Este README pode ser expandido com imagens do sistema, fluxogramas e diagramas UML. Basta solicitar!* ✨
