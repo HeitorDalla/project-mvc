@@ -20,7 +20,6 @@ public class UsuarioController {
     @FXML
     public void saveUsuario () {
         Endereco e = new Endereco();
-
         e.setLogradouro("Avenida Paulista");
         e.setNumero("66");
         e.setBairro("Bairro Jardim Estatal");
@@ -29,7 +28,6 @@ public class UsuarioController {
         e.setCep("86049013");
 
         Usuario u = new Usuario();
-
         u.setNome("Heitor");
         u.setCpf("000000000-0");
         u.setEmail("email@gmail.com");
