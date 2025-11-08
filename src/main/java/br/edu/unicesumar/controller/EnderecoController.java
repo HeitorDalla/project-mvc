@@ -25,5 +25,7 @@ public class EnderecoController {
         e.setCep("86049013");
 
         enderecoService.saveEndereco(e);
+
+        label.setText("Endereço salvo sucesso!");
     }
 }

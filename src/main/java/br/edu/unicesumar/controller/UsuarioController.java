@@ -31,7 +31,6 @@ public class UsuarioController {
         u.setNome("Heitor");
         u.setCpf("000000000-0");
         u.setEmail("email@gmail.com");
-
         u.setEndereco(e);
 
         // Vai enviar um objeto com os dados para salvar e verificar no banco de dados

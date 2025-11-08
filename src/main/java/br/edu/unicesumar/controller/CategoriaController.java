@@ -16,7 +16,6 @@ public class CategoriaController {
     @FXML
     public void saveCategoria () {
         Categoria c = new Categoria();
-        
         c.setNome("Eletrônicos");
 
         categoriaService.saveCategoria(c);
