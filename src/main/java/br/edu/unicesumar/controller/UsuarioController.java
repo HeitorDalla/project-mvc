@@ -9,14 +9,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class UsuarioController {
+    // Dependência Injetada
+    private final UsuarioService usuarioService;
+
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+    
     /* PRIMEIRO VAI CRIAR OS OBJETOS 'ENDERECO' E 'USUARIO'. DEPOIS CHAMA O 'USUARIOSERVICE' */
     /* NUNCA VAI ACESSAR O BANCO DE DADOS */
 
     /* ligacao entre a view e controller */
     @FXML
     private Label label;
-
-    UsuarioService usuarioService = new UsuarioService();
 
     @FXML
     public void saveUsuario () {
