@@ -21,11 +21,7 @@ public class PedidoDAO extends DAO<Pedido>{
     //LISTANDO O PEDIDO PELO IDENTIFICADOR
     public Pedido findOrderById(int id){
         try {
-            TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p " + "WHERE p.id = :id", Pedido.class);
-
-            query.setParameter("id", id);
-
-            return query.getSingleResult();      
+            return em.find(Pedido.class, id);
         } catch (Exception e) {
             return null;
         }

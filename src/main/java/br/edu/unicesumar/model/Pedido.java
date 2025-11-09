@@ -93,4 +93,12 @@ public class Pedido {
     public void setStatus(StatusPedido status) {
         this.status = status;
     }
+
+    public void addItemPedido (ItemPedido itemPedido) {
+        itemPedido.setPedido(this); // o this é o próprio objeto PEDIDO atual, que significa que o item atual pertence a esta pedido especifico
+
+        this.itens.add(itemPedido); // adiciona o item à lista de itens do pedido
+        
+        this.valorTotal += itemPedido.getSubTotal();
+    }
 }
