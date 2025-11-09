@@ -28,8 +28,8 @@ public class Pedido {
     @Column(name="id_pedido")
     private int id;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_usuario_pedido", referencedColumnName = "id_usuario")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario_pedido", nullable = false)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

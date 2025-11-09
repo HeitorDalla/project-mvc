@@ -28,8 +28,8 @@ public class Produto {
     @Column(name="preco_produto", nullable = false)
     private double preco;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_categoria_produto", referencedColumnName = "id_categoria")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_categoria_produto", nullable = false)
     private Categoria categoria;
 
     // CONSTRUTORES

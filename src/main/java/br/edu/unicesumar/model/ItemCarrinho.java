@@ -20,12 +20,12 @@ public class ItemCarrinho {
     @Column(name="id_item_carrinho")
     private int id;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_produto_item_carrinho", referencedColumnName = "id_produto")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_produto_item_carrinho", nullable = false)
     private Produto produto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_carrinho_item_carrinho", referencedColumnName = "id_carrinho")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_carrinho_item_carrinho", nullable = false)
     private Carrinho carrinho;
     
     @Column(name="quantidade_item_carrinho", nullable = false)

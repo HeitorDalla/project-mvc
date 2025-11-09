@@ -3,7 +3,6 @@ package br.edu.unicesumar.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,7 +25,7 @@ public class Categoria {
     @Column(name="nome_categoria", nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
     private List<Produto> produtos = new ArrayList<>();
     
     // CONSTRUTORES

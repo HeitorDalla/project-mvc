@@ -20,14 +20,14 @@ public class ItemPedido {
     @Column(name="id_item_pedido")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_produto_item_pedido", referencedColumnName = "id_produto")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_produto_item_pedido", nullable = false)
     private Produto produto;
     
     @Column(name="quantidade_item_pedido", nullable = false)
     private int quantidade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pedido_item_pedido", nullable = false)
     private Pedido pedido;
 

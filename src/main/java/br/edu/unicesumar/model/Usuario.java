@@ -12,12 +12,12 @@ import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
 
 //INFORMANDO PARA O JPA QUE ESTE OBJETO É UMA TABELA NO BANCO
-@Entity
-@Table(name="usuario_tbl")
+@Entity // indica ao JAP que essa classe é uma ENTIDADE e deve ser mapeada dentro do banco de dados
+@Table(name="usuario_tbl") // nome da tabela no banco de dados
 public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // marca como a CHAVE PRIMÁRIA da entidade
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // indica que o banco de dados é responsavel por gerar o valor (auto-increment)
     @Column(name="id_usuario")
     private int id;
 
@@ -30,8 +30,11 @@ public class Usuario {
     @Column(name="email_usuario", nullable = false)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_endereco_usuario", referencedColumnName = "id_endereco")
+    // OneToOne - relacionado a um e somente um endereco
+    // cascade = CascadeType.ALL - se eu atualizar, remover ou persistir um Usuario, a operacao tambem correspondera ao Endereco
+    // optional = false - indica que o Endereco é OBRIGATÓRIO para que um Usuario exista
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco_usuario", nullable = false) // especifica a chave estrangeira, sendo obrigatória (nullable = false)
     private Endereco endereco;
 
     // CONSTRUTORES

@@ -21,7 +21,7 @@ public class Endereco {
     private String logradouro;
     
     @Column(name="numero_endereco", nullable = false)
-    private String numero;
+    private String numero; // deveria ser 'int'
 
     @Column(name="bairro_endereco", nullable = false)
     private String bairro;
