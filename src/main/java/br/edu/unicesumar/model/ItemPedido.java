@@ -73,4 +73,12 @@ public class ItemPedido {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
+
+    public double getSubTotal () {
+        if (produto == null) {
+            return 0.0;
+        }
+        
+        return produto.getPreco() * this.quantidade;
+    }
 }
