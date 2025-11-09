@@ -12,11 +12,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class PedidoController {
+    // Dependência Injetada
+    private final PedidoService pedidoService;
+    
+    public PedidoController(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
+    }
+
     /* ligacao entre a view e controller */
     @FXML
     private Label label;
-
-    PedidoService pedidoService = new PedidoService();
 
     @FXML
     public void savePedido () {
@@ -40,9 +45,13 @@ public class PedidoController {
         pedido.setUsuario(u); // adicionando o cliente ao pedido
 
         // Salvando no banco (cascade - salva tudo automaticamente)
-        pedidoService.savePedido(pedido);
+        boolean sucesso = pedidoService.savePedido(pedido);
 
         // Mensagem de conclusão
-        label.setText("Pedido salvo com sucesso!");
+        if (sucesso) {
+            label.setText("Pedido salvo com sucesso!");
+        } else {
+            label.setText("Erro ao tentar salvar pedido. Verifique os dados!");
+        }
     }
 }
