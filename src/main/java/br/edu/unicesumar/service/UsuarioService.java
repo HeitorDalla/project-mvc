@@ -7,8 +7,7 @@ import br.edu.unicesumar.utils.Utils;
 public class UsuarioService {
     /* Aqui vai ter regras de negócio */
     /* Se algo der errado, ele vai retornar SEM SALVAR */
-    /* NUNCA VAI ACESSAR O BANCO DE DADOS */
-    /* Sempre vai pedir para o DAO fazer isso */
+    /* Chama o DAO para acessar o banco de dados */
 
     // Atributo que vai armazenar o usuarioDAO
     private UsuarioDAO usuarioDAO;
@@ -19,23 +18,20 @@ public class UsuarioService {
         this.usuarioDAO = new UsuarioDAO();
     }
 
-    public void saveUsuario (Usuario usuario) { // recebe o objeto passado do controller do ususario
+    public boolean saveUsuario (Usuario usuario) { // recebe o objeto passado do controller do ususario
         // Validação para o nome do usuário
         if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
-            return;
-        }
-
-        // Validação simples para o cpf do usuario
-        if (usuario.getCpf() == null || usuario.getCpf().isEmpty()) {
-            return;
+            return false;
         }
 
         // Validação complexa para o cpf
         if (!Utils.validarCPF(usuario.getCpf())) {
-            return;
+            return false;
         }
 
-        // Caso as validações estejam corretas, ele 
+        // Caso as validações estejam corretas, ele chama o DAO para savar/validar no banco de dados
         usuarioDAO.save(usuario);
+
+        return true;
     }
 }

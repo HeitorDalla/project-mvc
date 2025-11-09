@@ -1,9 +1,4 @@
 package br.edu.unicesumar;
-/*
-Put header here
-
-
- */
 
 import java.net.URL;
 import java.util.ResourceBundle;

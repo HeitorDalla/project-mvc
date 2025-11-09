@@ -1,6 +1,7 @@
 package br.edu.unicesumar.controller;
 
 import br.edu.unicesumar.service.UsuarioService;
+
 import br.edu.unicesumar.model.Endereco;
 import br.edu.unicesumar.model.Usuario;
 
@@ -34,8 +35,13 @@ public class UsuarioController {
         u.setEndereco(e);
 
         // Vai enviar um objeto com os dados para salvar e verificar no banco de dados
-        usuarioService.saveUsuario(u);
+        boolean sucesso = usuarioService.saveUsuario(u);
 
-        label.setText("Usuário e Endereço salvo com sucesso!");
+        // Mensagem de verificação
+        if (sucesso) {
+            label.setText("Usuário e Endereço salvo com sucesso!");
+        } else {
+            label.setText("Erro ao salvar o usuário. Verifique os dados!");
+        }
     }
 }
