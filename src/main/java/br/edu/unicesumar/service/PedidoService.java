@@ -1,19 +1,19 @@
 package br.edu.unicesumar.service;
 
+import java.util.List;
+
 import br.edu.unicesumar.dao.PedidoDAO;
 
 import br.edu.unicesumar.model.ItemPedido;
 import br.edu.unicesumar.model.Pedido;
 
 public class PedidoService {
-    private final PedidoDAO pedidoDAO;
-    private final UsuarioService usuarioService;
+    private PedidoDAO pedidoDAO;
+    private UsuarioService usuarioService;
 
-    // Construtor do pedido
-    public PedidoService (PedidoDAO pedidoDAO, UsuarioService usuarioService) {
-        /* Instancia o pedidoDAO, que vai ser responsabilizado por chamar o banco de dados */
-        this.pedidoDAO = pedidoDAO;
-        this.usuarioService = usuarioService;
+    public PedidoService () {
+        this.pedidoDAO = new PedidoDAO();
+        this.usuarioService = new UsuarioService();
     }
 
     // Salva o pedido e envia para o DAO armazenar/validar no banco de dados
@@ -66,5 +66,15 @@ public class PedidoService {
         }
 
         return true;
+    }
+
+    // Recebe o id do Controller, busca o Pedido no DAO e retorna o resultado ao Controller
+    public Pedido findById(int id) {
+        return pedidoDAO.findById(id);
+    }
+
+    // Método para listar todos os Usuários
+    public List<Pedido> listAll () {
+        return pedidoDAO.listAll();
     }
 }
