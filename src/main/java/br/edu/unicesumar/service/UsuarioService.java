@@ -1,5 +1,7 @@
 package br.edu.unicesumar.service;
 
+import java.util.List;
+
 import br.edu.unicesumar.dao.UsuarioDAO;
 
 import br.edu.unicesumar.model.Usuario;
@@ -12,12 +14,12 @@ public class UsuarioService {
     /* Chama o DAO para acessar o banco de dados */
 
     // Atributo que vai armazenar o usuarioDAO
-    private final UsuarioDAO usuarioDAO;
+    private UsuarioDAO usuarioDAO;
 
     // Construtor da classe servico do usuario
-    public UsuarioService (UsuarioDAO usuarioDAO) {
+    public UsuarioService () {
         /* Instancia o usuarioDAO, que vai ser responsabilizado por chamar o banco de dados */
-        this.usuarioDAO = usuarioDAO;
+        this.usuarioDAO = new UsuarioDAO();
     }
 
     // Método que vai salvar usuario e validar/enviar para o banco de dados
@@ -50,5 +52,15 @@ public class UsuarioService {
         }
 
         return true;
+    }
+
+    // Recebe o id do Controller, busca o Usuario no DAO e retorna o resultado ao Controller
+    public Usuario findById(int id) {
+        return usuarioDAO.findById(id);
+    }
+
+    // Método para listar todos os Usuários
+    public List<Usuario> listAll () {
+        return usuarioDAO.listAll();
     }
 }
