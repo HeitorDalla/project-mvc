@@ -83,4 +83,8 @@ public class Produto {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }    
+
+    public void addCategoria (Categoria categoria) {
+        this.categoria = categoria;
+    }
 }
