@@ -9,11 +9,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class ItemCarrinhoController {
+    // Injeção de Dependência
+    private final ItemCarrinhoService itemCarrinhoService;
+    
+    public ItemCarrinhoController(ItemCarrinhoService itemCarrinhoService) {
+        this.itemCarrinhoService = itemCarrinhoService;
+    }
+
     /* ligacao entre a view e controller */
     @FXML
     private Label label;
-
-    ItemCarrinhoService itemCarrinhoService = new ItemCarrinhoService();
 
     @FXML
     public void saveItemCarrinho () {
@@ -29,7 +34,15 @@ public class ItemCarrinhoController {
         ItemCarrinho ic = new ItemCarrinho();
         ic.setQuantidade(5);
         ic.setProduto(p);
-        
-        itemCarrinhoService.saveItemCarrinho(ic);
+
+        // Salva tudo de uma vez
+        boolean sucesso = itemCarrinhoService.saveItemCarrinho(ic);
+
+        // Mensagem de conclusão
+        if (sucesso) {
+            label.setText("Item adicionada ao carrinho com sucesso!");
+        } else {
+            label.setText("Erro ao tentar salvar item no carrinho. Verifique os dados!");
+        }
     }
 }
