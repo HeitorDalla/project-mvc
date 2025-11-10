@@ -1,23 +1,27 @@
 package br.edu.unicesumar.service;
 
+import java.util.List;
+
 import br.edu.unicesumar.dao.ProdutoDAO;
 
 import br.edu.unicesumar.model.Produto;
-import br.edu.unicesumar.model.Categoria;
 
 public class ProdutoService {
-    // Injeção de dependência
     private final ProdutoDAO produtoDAO;
     private final CategoriaService categoriaService;
 
-    public ProdutoService (ProdutoDAO produtoDAO, CategoriaService categoriaService) {
-        this.produtoDAO = produtoDAO;
-        this.categoriaService = categoriaService;
+    public ProdutoService () {
+        this.produtoDAO = new ProdutoDAO();
+        this.categoriaService = new CategoriaService();
     }
 
     // Salvar o produto no banco de dados
     public boolean saveProduto (Produto produto) {
         if (!validarProduto(produto)) {
+            return false;
+        }
+
+        if (!categoriaService.validarCategoria(produto.getCategoria())) {
             return false;
         }
 
@@ -44,26 +48,20 @@ public class ProdutoService {
             return false;
         }
 
-        return true;
-    }
-
-    // Adicionar uma categoria a um produto ja existente
-    public boolean addCategoria (Produto produto, Categoria categoria) {
-        if (!validarCategoria(categoria)) {
-            return false;
-        }
-
-        produto.addCategoria(categoria);
-
-        return true;
-    }
-    
-    // Validar categoria antes de adicionar um produto nela
-    public boolean validarCategoria (Categoria categoria) {
-        if (!categoriaService.validarCategoria(categoria)) {
+        if (produto.getCategoria() == null) {
             return false;
         }
 
         return true;
+    }
+
+    // Recebe o id do Controller, busca o Produto no DAO e retorna o resultado ao Controller
+    public Produto findById(int id) {
+        return produtoDAO.findById(id);
+    }
+
+    // Método para listar todos os Produtos
+    public List<Produto> listAll () {
+        return produtoDAO.listAll();
     }
 }
