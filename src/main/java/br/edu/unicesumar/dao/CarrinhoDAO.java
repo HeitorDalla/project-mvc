@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 public class CarrinhoDAO extends DAO<Carrinho>{
 
     //LISTANDO TODOS OS CARRINHOS
-    public List<Carrinho> listAllCarts(){
+    public List<Carrinho> listAll(){
         try {
             TypedQuery<Carrinho> query = em.createQuery("SELECT c FROM Carrinho c", Carrinho.class);
 
