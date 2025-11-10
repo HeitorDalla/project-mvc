@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 public class UsuarioDAO extends DAO<Usuario>{
 
     //LISTANDO TODOS OS USUÁRIOS
-    public List<Usuario> listAllUsers(){
+    public List<Usuario> listAll(){
         try {
             TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
 
@@ -19,7 +19,7 @@ public class UsuarioDAO extends DAO<Usuario>{
     }
 
     //LISTANDO O USUÁRIO PELO IDENTIFICADOR
-    public Usuario findUserById(int id){
+    public Usuario findById(int id){
         try {
             TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u " + "WHERE u.id = :id", Usuario.class);
 

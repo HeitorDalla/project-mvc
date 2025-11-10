@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 public class ItemPedidoDAO extends DAO<ItemPedido>{
 
     //LISTANDO TODOS OS ITENS DO PEDIDO
-    public List<ItemPedido> listAllOrderItens(){
+    public List<ItemPedido> listAll(){
         try {
             TypedQuery<ItemPedido> query = em.createQuery("SELECT ip FROM ItemPedido ip", ItemPedido.class);
 
@@ -19,7 +19,7 @@ public class ItemPedidoDAO extends DAO<ItemPedido>{
     }
 
     //LISTANDO O ITEM DO PEDIDO PELO IDENTIFICADOR
-    public ItemPedido findOrderItemById(int id){
+    public ItemPedido findById(int id){
         try {
             TypedQuery<ItemPedido> query = em.createQuery("SELECT ip FROM ItemPedido ip " + "WHERE ip.id = :id", ItemPedido.class);
 

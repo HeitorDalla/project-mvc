@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 public class EnderecoDAO extends DAO<Endereco>{
 
     //LISTANDO TODOS OS ENDERECOS
-    public List<Endereco> listAllAddress(){
+    public List<Endereco> listAll(){
         try {
             TypedQuery<Endereco> query = em.createQuery("SELECT e FROM Endereco e", Endereco.class);
 
@@ -19,7 +19,7 @@ public class EnderecoDAO extends DAO<Endereco>{
     }
 
     //LISTANDO O ENDERECO PELO IDENTIFICADOR
-    public Endereco findAddressById(int id){
+    public Endereco findById(int id){
         try {
             TypedQuery<Endereco> query = em.createQuery("SELECT e FROM Endereco e " + "WHERE e.id = :id", Endereco.class);
 

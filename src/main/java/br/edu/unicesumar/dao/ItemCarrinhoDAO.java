@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 public class ItemCarrinhoDAO extends DAO<ItemCarrinho>{
 
     //LISTANDO TODOS OS ITENS DO CARRINHO
-    public List<ItemCarrinho> listAllCartItens(){
+    public List<ItemCarrinho> listAll(){
         try {
             TypedQuery<ItemCarrinho> query = em.createQuery("SELECT ic FROM ItemCarrinho ic", ItemCarrinho.class);
 
@@ -19,7 +19,7 @@ public class ItemCarrinhoDAO extends DAO<ItemCarrinho>{
     }
 
     //LISTANDO O ITEM DO CARRINHO PELO IDENTIFICADOR
-    public ItemCarrinho findCartItemById(int id){
+    public ItemCarrinho findById(int id){
         try {
             TypedQuery<ItemCarrinho> query = em.createQuery("SELECT ic FROM ItemCarrinho ic " + "WHERE ic.id = :id", ItemCarrinho.class);
 

@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 public class CategoriaDAO extends DAO<Categoria>{
 
     //LISTANDO TODOS AS CATEGORIAS
-    public List<Categoria> listAllCategories(){
+    public List<Categoria> listAll(){
         try {
             TypedQuery<Categoria> query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);
 
@@ -19,7 +19,7 @@ public class CategoriaDAO extends DAO<Categoria>{
     }
 
     //LISTANDO O CATEGORIA PELO IDENTIFICADOR
-    public Categoria findCategoryById(int id){
+    public Categoria findById(int id){
         try {
             TypedQuery<Categoria> query = em.createQuery("SELECT c FROM Categoria c " + "WHERE c.id = :id", Categoria.class);
 

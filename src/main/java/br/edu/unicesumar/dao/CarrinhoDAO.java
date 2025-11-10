@@ -19,7 +19,7 @@ public class CarrinhoDAO extends DAO<Carrinho>{
     }
 
     //LISTANDO O CARRINHO PELO IDENTIFICADOR
-    public Carrinho findCartById(int id){
+    public Carrinho findById(int id){
         try {
             TypedQuery<Carrinho> query = em.createQuery("SELECT c FROM Carrinho c " + "WHERE c.id = :id", Carrinho.class);
 
