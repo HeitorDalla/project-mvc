@@ -1,8 +1,8 @@
 package br.edu.unicesumar.controller;
 
 import br.edu.unicesumar.service.ItemCarrinhoService;
+import br.edu.unicesumar.service.ProdutoService;
 
-import br.edu.unicesumar.model.Categoria;
 import br.edu.unicesumar.model.ItemCarrinho;
 import br.edu.unicesumar.model.Produto;
 
@@ -11,9 +11,11 @@ import javafx.scene.control.Label;
 
 public class ItemCarrinhoController {
     private ItemCarrinhoService itemCarrinhoService;
+    private ProdutoService produtoService;
     
     public ItemCarrinhoController() {
         this.itemCarrinhoService = new ItemCarrinhoService();
+        this.produtoService = new ProdutoService();
     }
 
     /* ligacao entre a view e controller */
@@ -22,19 +24,19 @@ public class ItemCarrinhoController {
 
     @FXML
     public void saveItemCarrinho () {
-        Categoria c = new Categoria();
-        c.setNome("Eletronicos");
+        // Vai vir da UI
+        int idProdutoSelecionado = 1;
+        int quantidadeSelecionada = 2;
 
-        Produto p = new Produto();
-        p.setNome("Controle remoto");
-        p.setDescricao("Eletronico utilizado para controlar remotamente um brinquedo.");
-        p.setPreco(200);
-        p.setCategoria(c);
+        Produto produto = produtoService.findById(idProdutoSelecionado);
+        if (produto == null) {
+            return;
+        }
 
         ItemCarrinho ic = new ItemCarrinho();
-        ic.setQuantidade(5);
-        ic.setProduto(p);
-
+        ic.setProduto(produto);
+        ic.setQuantidade(quantidadeSelecionada);
+        
         // Salva tudo de uma vez
         boolean sucesso = itemCarrinhoService.saveItemCarrinho(ic);
 
