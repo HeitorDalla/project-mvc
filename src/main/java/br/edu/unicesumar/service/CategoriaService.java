@@ -1,15 +1,16 @@
 package br.edu.unicesumar.service;
 
+import java.util.List;
+
 import br.edu.unicesumar.dao.CategoriaDAO;
 
 import br.edu.unicesumar.model.Categoria;
 
 public class CategoriaService {
-    // Injeção de Dependência
     private final CategoriaDAO categoriaDAO;
 
-    public CategoriaService (CategoriaDAO categoriaDAO) {
-        this.categoriaDAO = categoriaDAO;
+    public CategoriaService () {
+        this.categoriaDAO = new CategoriaDAO();
     }
 
     // Método que vai enviar o objeto para ser salvo no banco de dados
@@ -32,5 +33,15 @@ public class CategoriaService {
         }
 
         return true;
+    }
+
+    // Recebe o id do Controller, busca a Categoria no DAO e retorna o resultado ao Controller
+    public Categoria findById(int id) {
+        return categoriaDAO.findById(id);
+    }
+
+    // Método para listar todos as Categorias
+    public List<Categoria> listAll () {
+        return categoriaDAO.listAll();
     }
 }
