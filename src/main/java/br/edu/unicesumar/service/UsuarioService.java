@@ -1,7 +1,9 @@
 package br.edu.unicesumar.service;
 
 import br.edu.unicesumar.dao.UsuarioDAO;
+
 import br.edu.unicesumar.model.Usuario;
+
 import br.edu.unicesumar.utils.Utils;
 
 public class UsuarioService {
@@ -18,6 +20,7 @@ public class UsuarioService {
         this.usuarioDAO = usuarioDAO;
     }
 
+    // Método que vai salvar usuario e validar/enviar para o banco de dados
     public boolean saveUsuario (Usuario usuario) { // recebe o objeto passado do controller do ususario
         if (!validarUsuario(usuario)) {
             return false;
@@ -29,6 +32,7 @@ public class UsuarioService {
         return true;
     }
 
+    // Método que validar cada campo do Usuario
     public boolean validarUsuario (Usuario usuario) {
         // Apenas verifica se o objeto Usuario não é nulo, não verifica campo algum do objeto
         if (usuario == null) {
