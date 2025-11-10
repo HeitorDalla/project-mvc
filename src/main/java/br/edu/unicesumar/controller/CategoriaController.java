@@ -25,9 +25,13 @@ public class CategoriaController {
         c.setNome("Eletrônicos");
 
         // Salva tudo de uma vez
-        categoriaService.saveCategoria(c);
+        boolean sucesso = categoriaService.saveCategoria(c);
 
         // Mensagem de conclusão
-        label.setText("Categoria adicionada com sucesso!");
+        if (sucesso) {
+            label.setText("Categoria adicionada com sucesso!");
+        } else {
+            label.setText("Erro ao tentar salvar categoria. Verifique os dados!");
+        }
     }
 }
