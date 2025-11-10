@@ -1,6 +1,7 @@
 package br.edu.unicesumar.controller;
 
 import br.edu.unicesumar.service.ItemCarrinhoService;
+
 import br.edu.unicesumar.model.Categoria;
 import br.edu.unicesumar.model.ItemCarrinho;
 import br.edu.unicesumar.model.Produto;
@@ -9,11 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class ItemCarrinhoController {
-    // Injeção de Dependência
-    private final ItemCarrinhoService itemCarrinhoService;
+    private ItemCarrinhoService itemCarrinhoService;
     
-    public ItemCarrinhoController(ItemCarrinhoService itemCarrinhoService) {
-        this.itemCarrinhoService = itemCarrinhoService;
+    public ItemCarrinhoController() {
+        this.itemCarrinhoService = new ItemCarrinhoService();
     }
 
     /* ligacao entre a view e controller */

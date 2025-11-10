@@ -12,11 +12,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class PedidoController {
-    // Dependência Injetada
-    private final PedidoService pedidoService;
+    private PedidoService pedidoService;
     
-    public PedidoController(PedidoService pedidoService) {
-        this.pedidoService = pedidoService;
+    public PedidoController() {
+        this.pedidoService = new PedidoService();
     }
 
     /* ligacao entre a view e controller */

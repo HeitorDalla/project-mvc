@@ -8,11 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class CategoriaController {
-    // Injeção de Dependência
-    private final CategoriaService categoriaService;
+    private CategoriaService categoriaService;
     
-    public CategoriaController(CategoriaService categoriaService) {
-        this.categoriaService = categoriaService;
+    public CategoriaController() {
+        this.categoriaService = new CategoriaService();
     }
 
     /* ligacao entre a view e controller */

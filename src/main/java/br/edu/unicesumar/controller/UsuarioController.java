@@ -9,11 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class UsuarioController {
-    // Dependência Injetada
-    private final UsuarioService usuarioService;
+    private UsuarioService usuarioService;
 
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    public UsuarioController() {
+        this.usuarioService = new UsuarioService();
     }
     
     /* PRIMEIRO VAI CRIAR OS OBJETOS 'ENDERECO' E 'USUARIO'. DEPOIS CHAMA O 'USUARIOSERVICE' */

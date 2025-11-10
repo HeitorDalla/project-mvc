@@ -9,11 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class ProdutoController {
-    // Injeção de Dependência
-    private final ProdutoService produtoService;
+    private ProdutoService produtoService;
 
-    public ProdutoController(ProdutoService produtoService) {
-        this.produtoService = produtoService;
+    public ProdutoController() {
+        this.produtoService = new ProdutoService();
     }
 
     /* ligacao entre a view e controller */
