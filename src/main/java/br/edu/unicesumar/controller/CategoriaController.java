@@ -1,7 +1,7 @@
 package br.edu.unicesumar.controller;
 
 import br.edu.unicesumar.service.CategoriaService;
-
+import br.edu.unicesumar.exception.BusinessException;
 import br.edu.unicesumar.model.Categoria;
 
 import javafx.fxml.FXML;
@@ -20,16 +20,19 @@ public class CategoriaController {
 
     @FXML
     public void saveCategoria () {
-        Categoria c = new Categoria();
-        c.setNome("Eletrônicos");
+        try {
+            Categoria c = new Categoria();
+            c.setNome("Eletrônicos");
 
-        // Salva tudo de uma vez
-        boolean sucesso = categoriaService.saveCategoria(c);
+            // Salva tudo de uma vez
+            categoriaService.saveCategoria(c);
 
-        // Mensagem de conclusão
-        if (sucesso) {
             label.setText("Categoria adicionada com sucesso!");
-        } else {
+        } catch (BusinessException ex) {
+            label.setText(ex.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+
             label.setText("Erro ao tentar salvar categoria. Verifique os dados!");
         }
     }
