@@ -8,6 +8,8 @@ import br.edu.unicesumar.model.Usuario;
 
 import br.edu.unicesumar.utils.Utils;
 
+import br.edu.unicesumar.exception.BusinessException;;
+
 public class UsuarioService {
     /* Aqui vai ter regras de negócio */
     /* Se algo der errado, ele vai retornar SEM SALVAR */
@@ -23,35 +25,35 @@ public class UsuarioService {
     }
 
     // Método que vai salvar usuario e validar/enviar para o banco de dados
-    public boolean saveUsuario (Usuario usuario) { // recebe o objeto passado do controller do ususario
-        if (!validarUsuario(usuario)) {
-            return false;
-        }
+    public void saveUsuario (Usuario usuario) throws BusinessException { // recebe o objeto passado do controller do ususario
+        validarUsuario(usuario);
 
         // Caso as validações estejam corretas, ele chama o DAO para savar/validar no banco de dados
         usuarioDAO.save(usuario);
-
-        return true;
     }
 
     // Método que validar cada campo do Usuario
-    public boolean validarUsuario (Usuario usuario) {
+    // se dentro desse método eu chamo outro que lança 'BusinessException' mas nao coloco try/catch, preciso declarar throws na assinatura até chegar no controller
+    public void validarUsuario (Usuario usuario) throws BusinessException {
         // Apenas verifica se o objeto Usuario não é nulo, não verifica campo algum do objeto
         if (usuario == null) {
-             return false;
+             throw new BusinessException("Usuário não pode ser nulo.");
         }
 
         // Validação para o nome do usuário
         if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
-            return false;
+            throw new BusinessException("Nome do usuário não pode ser nulo.");
         }
 
         // Validação complexa para o cpf
         if (!Utils.validarCPF(usuario.getCpf())) {
-            return false;
+            throw new BusinessException("CPF precisá ser válido.");
         }
 
-        return true;
+        // Validação para o Endereço
+        if (usuario.getEndereco() == null) {
+            throw new BusinessException("Endereço do usuário não pode ser nulo.");
+        }
     }
 
     // Recebe o id do Controller, busca o Usuario no DAO e retorna o resultado ao Controller
