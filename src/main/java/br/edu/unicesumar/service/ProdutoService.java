@@ -6,6 +6,8 @@ import br.edu.unicesumar.dao.ProdutoDAO;
 
 import br.edu.unicesumar.model.Produto;
 
+import br.edu.unicesumar.exception.BusinessException;
+
 public class ProdutoService {
     private final ProdutoDAO produtoDAO;
     private final CategoriaService categoriaService;
@@ -16,43 +18,35 @@ public class ProdutoService {
     }
 
     // Salvar o produto no banco de dados
-    public boolean saveProduto (Produto produto) {
-        if (!validarProduto(produto)) {
-            return false;
-        }
+    public void saveProduto (Produto produto) throws BusinessException {
+        validarProduto(produto);
 
-        if (!categoriaService.validarCategoria(produto.getCategoria())) {
-            return false;
-        }
+        categoriaService.validarCategoria(produto.getCategoria());
 
         produtoDAO.save(produto);
-
-        return true;
     }
 
     // Validar cada campo do produto
-    public boolean validarProduto (Produto produto) {
+    public void validarProduto (Produto produto) throws BusinessException {
         if (produto == null) {
-            return false;
+            throw new BusinessException("Produto não pode ser nulo.");
         }
 
         if (produto.getNome() == null || produto.getNome().isEmpty()) {
-            return false;
+            throw new BusinessException("Nome do produto não pode ser nulo.");
         }
 
         if (produto.getDescricao() == null || produto.getDescricao().isEmpty()) {
-            return false;
+            throw new BusinessException("Descrição do produto não pode ser nula.");
         }
 
         if (produto.getPreco() <= 0) {
-            return false;
+            throw new BusinessException("Preco do produto não pode ser negativo.");
         }
 
         if (produto.getCategoria() == null) {
-            return false;
+            throw new BusinessException("Categoria do produto não pode ser nula.");
         }
-
-        return true;
     }
 
     // Recebe o id do Controller, busca o Produto no DAO e retorna o resultado ao Controller
