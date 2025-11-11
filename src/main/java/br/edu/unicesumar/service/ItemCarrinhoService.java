@@ -4,6 +4,8 @@ import java.util.List;
 
 import br.edu.unicesumar.dao.ItemCarrinhoDAO;
 
+import br.edu.unicesumar.exception.BusinessException;
+
 import br.edu.unicesumar.model.ItemCarrinho;
 import br.edu.unicesumar.model.Produto;
 
@@ -17,37 +19,31 @@ public class ItemCarrinhoService {
     }
 
     // Método que salvar/validar no banco de dados
-    public boolean saveItemCarrinho (ItemCarrinho itemCarrinho) {
-        if (!validarItemCarrinho(itemCarrinho)) {
-            return false;
-        }
+    public void saveItemCarrinho (ItemCarrinho itemCarrinho) throws BusinessException {
+        validarItemCarrinho(itemCarrinho);
 
         itemCarrinhoDAO.save(itemCarrinho);
-
-        return true;
     }
 
     // Validar o ItemCarrinho antes de salvar no banco de dados
-    public boolean validarItemCarrinho (ItemCarrinho itemCarrinho) {
+    public void validarItemCarrinho (ItemCarrinho itemCarrinho) throws BusinessException {
         if (itemCarrinho == null) {
-            return false;
+            throw new BusinessException("Item do carrinho não pode ser nulo.");
         }
 
         if (itemCarrinho.getProduto() == null) {
-            return false;
+            throw new BusinessException("Produto do item do carrinho é obrigatório.");
         }
 
         // Verificar se o produto ja existe no banco de dados
         Produto produto = produtoService.findById(itemCarrinho.getProduto().getId());
         if (produto == null) {
-            return false;
+            throw new BusinessException("Produto informado não existe no sistema.");
         }
 
         if (itemCarrinho.getQuantidade() <= 0) {
-            return false;
+            throw new BusinessException("Quantidade do item deve maior que zero.");
         }
-
-        return true;
     }
 
     // Recebe o id do Controller, busca o ItemCarrinho no DAO e retorna o resultado ao Controller
