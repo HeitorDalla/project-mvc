@@ -2,6 +2,8 @@ package br.edu.unicesumar.service;
 
 import br.edu.unicesumar.dao.ItemPedidoDAO;
 
+import br.edu.unicesumar.exception.BusinessException;
+
 import br.edu.unicesumar.model.ItemPedido;
 import br.edu.unicesumar.model.Pedido;
 
@@ -15,35 +17,29 @@ public class ItemPedidoService {
     }
 
     // Método que vai salvar o itemPedido dentro do pedido no banco de dados
-    public boolean saveItemPedido (Pedido pedido, ItemPedido itemPedido) {
-        if (!validarItemPedido(itemPedido)) {
-            return false;
-        }
+    public void saveItemPedido (Pedido pedido, ItemPedido itemPedido) throws BusinessException {
+        validarItemPedido(itemPedido);
 
         if (pedido == null) {
-            return false;
+            throw new BusinessException("Pedido não pode ser nulo.");
         }
 
         itemPedidoDAO.save(itemPedido);
-
-        return true;
     }
 
-    // Método que vai validar todos o objeto ItemPedido e todos os campos de ItemPedido
-    public boolean validarItemPedido (ItemPedido itemPedido) {
+    // Método que vai validar o objeto ItemPedido e todos os campos de ItemPedido
+    public void validarItemPedido (ItemPedido itemPedido) throws BusinessException {
         if (itemPedido == null) {
-            return false;
+            throw new BusinessException("Item do pedido não pode ser nulo.");
         }
 
         if (itemPedido.getProduto() == null) {
-            return false;
+            throw new BusinessException("Produto do item não pode ser nulo.");
         }
 
         if (itemPedido.getQuantidade() <= 0) {
-            return false;
+            throw new BusinessException("Quantidade do item tem que ser maior que zero.");
         }
-
-        return true;
     }
 
     // Recebe o id do Controller, busca o ItemPedido no DAO e retorna o resultado ao Controller
