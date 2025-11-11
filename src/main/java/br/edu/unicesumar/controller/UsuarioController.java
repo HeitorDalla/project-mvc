@@ -8,6 +8,8 @@ import br.edu.unicesumar.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import br.edu.unicesumar.exception.BusinessException;
+
 public class UsuarioController {
     private UsuarioService usuarioService;
 
@@ -24,27 +26,29 @@ public class UsuarioController {
 
     @FXML
     public void saveUsuario () {
-        Endereco e = new Endereco();
-        e.setLogradouro("Avenida Paulista");
-        e.setNumero("66");
-        e.setBairro("Bairro Jardim Estatal");
-        e.setCidade("Ribeirão Preto");
-        e.setEstado("São Paulo");
-        e.setCep("86049013");
+        try {
+            Endereco e = new Endereco();
+            e.setLogradouro("Avenida Paulista");
+            e.setNumero("66");
+            e.setBairro("Bairro Jardim Estatal");
+            e.setCidade("Ribeirão Preto");
+            e.setEstado("São Paulo");
+            e.setCep("86049013");
 
-        Usuario u = new Usuario();
-        u.setNome("Heitor");
-        u.setCpf("000000000-0");
-        u.setEmail("email@gmail.com");
-        u.setEndereco(e);
+            Usuario u = new Usuario();
+            u.setNome("Heitor");
+            u.setCpf("000000000-0");
+            u.setEmail("email@gmail.com");
+            u.setEndereco(e);
 
-        // Vai enviar um objeto com os dados para salvar e verificar no banco de dados
-        boolean sucesso = usuarioService.saveUsuario(u);
+            usuarioService.saveUsuario(u);
 
-        // Mensagem de verificação
-        if (sucesso) {
             label.setText("Usuário e Endereço salvo com sucesso!");
-        } else {
+        } catch (BusinessException ex) {
+            label.setText(ex.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            
             label.setText("Erro ao salvar o usuário. Verifique os dados!");
         }
     }
