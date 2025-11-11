@@ -3,7 +3,7 @@ package br.edu.unicesumar.controller;
 import br.edu.unicesumar.service.PedidoService;
 
 import br.edu.unicesumar.enumerate.StatusPedido;
-
+import br.edu.unicesumar.exception.BusinessException;
 import br.edu.unicesumar.model.Endereco;
 import br.edu.unicesumar.model.Pedido;
 import br.edu.unicesumar.model.Usuario;
@@ -24,32 +24,33 @@ public class PedidoController {
 
     @FXML
     public void savePedido () {
-        Pedido pedido = new Pedido();
-        pedido.setStatus(StatusPedido.ABERTO);
+        try {
+            Pedido pedido = new Pedido();
+            pedido.setStatus(StatusPedido.ABERTO);
 
-        Endereco e = new Endereco();
-        e.setLogradouro("Avenida Paulista");
-        e.setNumero("66");
-        e.setBairro("Bairro Jardim Estatal");
-        e.setCidade("Ribeirão Preto");
-        e.setEstado("São Paulo");
-        e.setCep("86049013");
+            Endereco e = new Endereco();
+            e.setLogradouro("Avenida Paulista");
+            e.setNumero("66");
+            e.setBairro("Bairro Jardim Estatal");
+            e.setCidade("Ribeirão Preto");
+            e.setEstado("São Paulo");
+            e.setCep("86049013");
 
-        Usuario u = new Usuario();
-        u.setNome("Heitor");
-        u.setCpf("000000000-0");
-        u.setEmail("email@gmail.com");
-        u.setEndereco(e); // adicionando o endereco ao cliente
+            Usuario u = new Usuario();
+            u.setNome("Heitor");
+            u.setCpf("000000000-0");
+            u.setEmail("email@gmail.com");
+            u.setEndereco(e); // adicionando o endereco ao cliente
+            pedido.setUsuario(u); // adicionando o cliente ao pedido
 
-        pedido.setUsuario(u); // adicionando o cliente ao pedido
+            pedidoService.savePedido(pedido);
 
-        // Salvando no banco (cascade - salva tudo automaticamente)
-        boolean sucesso = pedidoService.savePedido(pedido);
-
-        // Mensagem de conclusão
-        if (sucesso) {
             label.setText("Pedido salvo com sucesso!");
-        } else {
+        } catch (BusinessException ex) {
+            label.setText(ex.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+
             label.setText("Erro ao tentar salvar pedido. Verifique os dados!");
         }
     }
