@@ -4,6 +4,8 @@ import java.util.List;
 
 import br.edu.unicesumar.dao.PedidoDAO;
 
+import br.edu.unicesumar.exception.BusinessException;
+
 import br.edu.unicesumar.model.ItemPedido;
 import br.edu.unicesumar.model.Pedido;
 
@@ -17,55 +19,44 @@ public class PedidoService {
     }
 
     // Salva o pedido e envia para o DAO armazenar/validar no banco de dados
-    public boolean savePedido (Pedido pedido) {
-        if (!validarPedido(pedido)) {
-            return false;
-        }
+    public void savePedido (Pedido pedido) throws BusinessException {
+        validarPedido(pedido);
 
         // Se todos as validações forem corretas, ele chama o DAO para salvar no banco de dados
         pedidoDAO.save(pedido);
-
-        return true;
     }
 
     // Adiciona o itemPedido ao pedido
-    public boolean addItemPedido (Pedido pedido, ItemPedido itemPedido) {
+    public void addItemPedido (Pedido pedido, ItemPedido itemPedido) throws BusinessException {
         // Validar item antes de adicionar
-        if (!validarItemPedido(itemPedido)) {
-            return false;
-        }
+        validarItemPedido(itemPedido);
         
         pedido.addItemPedido(itemPedido);
-
-        return true;
     }
 
     // Valida o pedido antes de salvar no banco de dados (DAO)
-    public boolean validarPedido (Pedido pedido) {
+    public void validarPedido (Pedido pedido) throws BusinessException {
+        if (pedido == null) {
+            throw new BusinessException("Pedido não pode ser nulo.");
+        }
         // Apenas verifica se o objeto Usuario não é nulo, não verifica campo algum do objeto
         if (pedido.getUsuario() == null) {
-            return false;
+            throw new BusinessException("Usuário do pedido não pode ser nulo.");
         }
 
-        // Chame o UsuarioService para validar o Usuario completo
-        if (!usuarioService.validarUsuario(pedido.getUsuario())) {
-            return false;
-        }
-
-        return true;
+        // Chame o UsuarioService para validar o Usuario completo, nao precisa de 'if', pois ja lança excessão
+        usuarioService.validarUsuario(pedido.getUsuario());
     }
 
     // Valida as informacoes do item antes de adicionar ao pedido
-    public boolean validarItemPedido (ItemPedido itemPedido) {
+    public void validarItemPedido (ItemPedido itemPedido) throws BusinessException {
         if (itemPedido.getProduto() == null) {
-            return false;
+            throw new BusinessException("Produto do item não pode ser nulo.");
         }
         
-        if (itemPedido.getQuantidade() <=0) {
-            return false;
+        if (itemPedido.getQuantidade() <= 0) {
+            throw new BusinessException("Quantidade do item deve ser maior que zero.");
         }
-
-        return true;
     }
 
     // Recebe o id do Controller, busca o Pedido no DAO e retorna o resultado ao Controller
