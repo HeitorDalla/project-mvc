@@ -6,6 +6,8 @@ import br.edu.unicesumar.dao.CategoriaDAO;
 
 import br.edu.unicesumar.model.Categoria;
 
+import br.edu.unicesumar.exception.BusinessException;
+
 public class CategoriaService {
     private final CategoriaDAO categoriaDAO;
 
@@ -14,25 +16,21 @@ public class CategoriaService {
     }
 
     // Método que vai enviar o objeto para ser salvo no banco de dados
-    public boolean saveCategoria (Categoria categoria) {
-        if (!validarCategoria(categoria))
+    public void saveCategoria (Categoria categoria) throws BusinessException {
+        validarCategoria(categoria);
 
         categoriaDAO.save(categoria);
-
-        return true;
     }
 
     // Método que vai validar cada campo da categoria
-    public boolean validarCategoria (Categoria categoria) {
+    public void validarCategoria (Categoria categoria) throws BusinessException {
         if (categoria == null) {
-            return false;
+            throw new BusinessException("Categoria não pode ser nula.");
         }
 
         if (categoria.getNome() == null || categoria.getNome().isEmpty()) {
-            return false;
+            throw new BusinessException("Nome da categoria não pode ser nula.");
         }
-
-        return true;
     }
 
     // Recebe o id do Controller, busca a Categoria no DAO e retorna o resultado ao Controller
