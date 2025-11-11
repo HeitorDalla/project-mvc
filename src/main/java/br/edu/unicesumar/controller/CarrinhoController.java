@@ -1,7 +1,7 @@
 package br.edu.unicesumar.controller;
 
 import br.edu.unicesumar.service.CarrinhoService;
-
+import br.edu.unicesumar.exception.BusinessException;
 import br.edu.unicesumar.model.Carrinho;
 
 import javafx.fxml.FXML;
@@ -22,12 +22,15 @@ public class CarrinhoController {
 
     @FXML
     public void saveCarrinho () {
-        boolean sucesso = carrinhoService.saveCarrinho(carrinhoAtual);
+        try {
+            carrinhoService.saveCarrinho(carrinhoAtual);
 
-        // Mensagem de conclusão
-        if (sucesso) {
             label.setText("Carrinho adicionado com sucesso!");
-        } else {
+        } catch (BusinessException ex) {
+            label.setText(ex.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+
             label.setText("Erro ao tentar salvar carrinho!");
         }
     }
