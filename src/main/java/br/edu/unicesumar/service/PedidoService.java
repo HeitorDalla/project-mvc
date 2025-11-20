@@ -50,6 +50,10 @@ public class PedidoService {
 
     // Valida as informacoes do item antes de adicionar ao pedido
     public void validarItemPedido (ItemPedido itemPedido) throws BusinessException {
+        if (itemPedido == null) {
+            throw new BusinessException("Item de pedido não pode ser nulo.");
+        }
+        
         if (itemPedido.getProduto() == null) {
             throw new BusinessException("Produto do item não pode ser nulo.");
         }
